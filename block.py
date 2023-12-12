@@ -8,14 +8,14 @@ class Rect:
             size:Tuple[float], 
             color:Tuple[int], 
             type:str, 
-            window:pygame.Surface
-            ):
+            window:pygame.Surface,
+            texture:pygame.Surface=None):
         self.pos = pos
         self.size = size
         self.type = type
         self.color = color
         self.window = window
-        self.texture = None
+        self.texture = texture
         self.rect = pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
         self.center = (self.pos[0] + self.size[0] / 2, self.pos[1] + self.size[1] / 2)
         self.light = 0
@@ -25,7 +25,8 @@ class Rect:
         pos = [self.pos[0] + block_offset[0], self.pos[1] + block_offset[1]]
 
         if self.texture == None:
-            pygame.draw.rect(self.window, self.color, self.rect)
+            if self.type != "air":
+                pygame.draw.rect(self.window, self.color, self.rect)
         else:
             self.window.blit(self.texture, pos)
         if self.light > 0:
@@ -79,6 +80,10 @@ class Rect:
             self.light = -255
 
 
+    def rm_texture(self):
+        self.texture = None
+
+
 def rect(window: pygame.Surface, pos: tuple, size: tuple, color: tuple):
     surf = pygame.Surface(size)
     surf.set_alpha(color[3])
@@ -86,9 +91,7 @@ def rect(window: pygame.Surface, pos: tuple, size: tuple, color: tuple):
     window.blit(surf, pos)
 
 
-BLOCK_TYPES = [
-    (-1, -1, -1),
-    (50, 168, 82),
-    (33, 18, 9),
-    (73, 80, 82)
-]
+def collide_point(rect:List[int], point:List[int]):
+    collide_x = point[0] > rect[0] and point[0] < rect[0] + rect[2]
+    collide_y = point[1] > rect[1] and point[1] < rect[1] + rect[3]
+    return collide_x and collide_y

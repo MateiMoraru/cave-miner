@@ -9,7 +9,6 @@ class Player(Entity):
         super().__init__(window, pos, (70, 70), (0, 0, 0), sprite)
         self.offset = [0, 0]
         self.spritesheet = spritesheet
-        self.light = LIGHT(128, self.spritesheet.image(SHADOW))
 
     
     def draw(self):
@@ -25,10 +24,10 @@ class Player(Entity):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_w]:
-            self.pos[1] -= self.speed
+            self.offset[1] += self.speed
         if keys[pygame.K_a]:
-            self.pos[0] -= self.speed
+            self.offset[0] += self.speed
         if keys[pygame.K_s]:
-            self.pos[1] += self.speed
+            self.offset[1] -= self.speed
         if keys[pygame.K_d]:
-            self.pos[0] += self.speed
+            self.offset[0] -= self.speed

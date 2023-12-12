@@ -15,7 +15,8 @@ class Game:
         self.running = True
         
         self.spritesheet = Spritesheet("assets/spritesheet.png", 32, 320)
-        self.environment = Environment(self.window, self.window_size, self.spritesheet, self.font) 
+        self.tiles = Spritesheet("assets/tiles.png", 32, 320)
+        self.environment = Environment(self.window, self.window_size, self.spritesheet, self.tiles, self.font) 
 
         self.clock = pygame.time.Clock()
         
@@ -35,7 +36,7 @@ class Game:
     def draw(self):
         self.environment.draw()
 
-        Text(self.font, f"FPS {int(self.clock.get_fps())}", (0, 0, 0), (0, 0), "topleft").draw(self.window)
+        Text(self.font, f"FPS {int(self.clock.get_fps())}", (255, 255, 255), (0, 0), "topleft").draw(self.window)
 
 
     def loop(self):

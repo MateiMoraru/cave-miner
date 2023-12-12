@@ -5,23 +5,27 @@ from spritesheet import *
 from player import Player
 import random
 
+from tiles import Tiles
+
 class Environment:
-    def __init__(self, window:pygame.Surface, window_size:tuple, spritesheet:Spritesheet, font:pygame.Font):
+    def __init__(self, window:pygame.Surface, window_size:tuple, spritesheet:Spritesheet, tiles:Spritesheet, font:pygame.Font):
         self.window = window
         self.window_size = window_size
         self.spritesheet = spritesheet
+        self.tiles_spritesheet = tiles
         self.sprite_size = (64, 64)
         self.font = font
-
         self.player = Player(self.window, (self.window_size[0] / 2, self.window_size[1] / 2), self.spritesheet.image(PLAYER), spritesheet)
         self.light_sources = []
-
+        
+        self.tiles = Tiles(self.window, self.window_size, self.tiles_spritesheet, self.sprite_size)
     
     def loop(self):
         self.player.loop()
 
 
     def draw(self):
+        self.tiles.loop(self.in_camera_bounds, self.player.offset)
         self.player.draw()
     
     def in_camera_bounds(self, rect:Rect, rect_offset:tuple=(0, 0)):
