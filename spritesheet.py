@@ -26,8 +26,8 @@ class Spritesheet(object):
     
 
     def image(self, id, colorkey = (0, 0, 0)):
-        x = (id % (self.sprites_no-1)) * self.size
-        y = (id // (self.sprites_no-1)) * self.size
+        x = (id % (self.sprites_no)) * self.size
+        y = (id // (self.sprites_no)) * self.size
         return self.image_at((x, y, self.size, self.size), colorkey)
     
 
@@ -40,17 +40,16 @@ class Spritesheet(object):
                 for x in range(image_count)]
         return self.images_at(tups, colorkey)
     
-PLAYER = 0
-PLAYER_RIGHT_1 = 1
-PLAYER_RIGHT_2 = 2
-PLAYER_RIGHT_3 = 3
-PLAYER_LEFT_1 = 4
-PLAYER_LEFT_2 = 5
-PLAYER_LEFT_3 = 6
-PLAYER_UP_1 = 7
-PLAYER_UP_2 = 8
-PLAYER_UP_3 = 9
-PLAYER_DOWN_1 = 10
-PLAYER_DOWN_2 = 11
-PLAYER_DOWN_3 = 12
-SHADOW = 13
+PLAYER = 20
+PLAYER_RIGHT_1 = 21
+PLAYER_RIGHT_2 = 22
+PLAYER_RIGHT_3 = 23
+PLAYER_LEFT_1 = 24
+PLAYER_LEFT_2 = 25
+PLAYER_LEFT_3 = 26
+PLAYER_UP_1 = 27
+PLAYER_UP_2 = 28
+PLAYER_UP_3 = 29
+PLAYER_DOWN_1 = 30
+PLAYER_DOWN_2 = 31
+PLAYER_DOWN_3 = 32

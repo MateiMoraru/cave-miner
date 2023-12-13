@@ -19,8 +19,8 @@ class Game:
 
         self.font = pygame.font.Font('assets/font.ttf', int(20 * self.scale))
         self.spritesheet = Spritesheet("assets/spritesheet.png", 32, 320)
-        self.tiles = Spritesheet("assets/tiles.png", 32, 320)
-        self.environment = Environment(self.window, self.window_size, self.scale, self.spritesheet, self.tiles, self.font) 
+        #self.tiles = Spritesheet("assets/tiles.png", 32, 320)
+        self.environment = Environment(self.window, self.window_size, self.scale, self.spritesheet, self.font) 
 
         self.clock = pygame.time.Clock()
         

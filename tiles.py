@@ -31,12 +31,17 @@ class Tiles:
                 tile_pos = (tile.pos[0] + offset[0], tile.pos[1] + offset[1])
                 dist = dist_point(player_mid, tile_pos)
 
-                if dist < 5 * self.sprite_size[0]:
+                if dist < 4 * self.sprite_size[0]:
                     tile.draw(offset)
-                    alpha = (5 * self.sprite_size[0] - dist) / 4.5
+                    alpha = (5 * self.sprite_size[0] - dist) / 10
                     rect(self.window, tile_pos, tile.size, (255, 255, 255, alpha))
-                #elif dist > 10 * self.sprite_size[0]:
-                #    rect(self.window, tile_pos, tile.size, (0, 0, 0, 255))
+                elif dist < 7 * self.sprite_size[0]:
+                    tile.draw(offset)
+                    alpha = dist - 4 * self.sprite_size[0]
+                    alpha = (5 * alpha) / 5
+                    if alpha > 255:
+                        alpha = 255
+                    rect(self.window, tile_pos, tile.size, (0, 5, 13, alpha))
                 
 
                 if tile.collide_point(mouse, offset):
