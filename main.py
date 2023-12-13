@@ -3,27 +3,31 @@ from environment import Environment
 from spritesheet import Spritesheet
 from text import Text
 from menu import Menu
+import pyautogui
 
 class Game:
     def __init__(self):
         pygame.init()
-        self.font = pygame.font.Font('assets/font.ttf', 20)
-
-        self.window_size = (1100, 750)
-        self.window = pygame.display.set_mode(self.window_size)
-        pygame.display.set_caption("Terraria")
-        self.running = True
         
+
+        screen_size = pyautogui.size()
+        self.window_size = (screen_size.width, screen_size.height)
+        self.scale = screen_size[0] / 1100 # Default sizing is (1100, 750)
+        self.window = pygame.display.set_mode(self.window_size, pygame.FULLSCREEN)
+        pygame.display.set_caption("Cave Miner")
+        self.running = True
+
+        self.font = pygame.font.Font('assets/font.ttf', int(20 * self.scale))
         self.spritesheet = Spritesheet("assets/spritesheet.png", 32, 320)
         self.tiles = Spritesheet("assets/tiles.png", 32, 320)
-        self.environment = Environment(self.window, self.window_size, self.spritesheet, self.tiles, self.font) 
+        self.environment = Environment(self.window, self.window_size, self.scale, self.spritesheet, self.tiles, self.font) 
 
         self.clock = pygame.time.Clock()
         
         self.in_menu = [True, False]
         main_menu = Menu(self.window, self.window_size, self.window_size)
-        main_menu.add_buttons(self.main_menu_start, self.font, (self.window_size[0] / 2 - 250, self.window_size[1] / 2 - 25), (500, 50), (111, 123, 128, 255), "Start Game")
-        main_menu.add_buttons(self.exit, self.font, (self.window_size[0] / 2 - 250, self.window_size[1] / 2 + 50), (500, 50), (111, 123, 128, 255), "Exit")
+        main_menu.add_buttons(self.main_menu_start, self.font, (self.window_size[0] / 2 , self.window_size[1] / 2), (500 * self.scale, 50 * self.scale), (111, 123, 128, 255), "Start Game")
+        main_menu.add_buttons(self.exit, self.font, (self.window_size[0] / 2, self.window_size[1] / 2 + 100 * self.scale), (500 * self.scale, 50 * self.scale), (111, 123, 128, 255), "Exit")
         self.menus = [main_menu]
 
 
@@ -44,6 +48,9 @@ class Game:
             for e in pygame.event.get():
                 if e.type == pygame.QUIT:
                     self.exit()
+                if e.type == pygame.KEYDOWN:
+                    if e.key == pygame.K_ESCAPE:
+                        self.in_menu[0] = not self.in_menu[0]
                     
             self.window.fill((0, 5, 13))
 

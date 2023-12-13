@@ -1,11 +1,13 @@
+from typing import Tuple, List
 import pygame
 from block import rect
 from text import Text
 
 class Button:
-    def __init__(self, onclick, window:pygame.Surface, font:pygame.Font, pos:tuple, size:tuple, color:tuple=(111, 123, 128, 255), color_hover:tuple=(79, 88, 92, 255), text:str="", text_color:tuple=(0, 0, 0)):
+    def __init__(self, onclick, window:pygame.Surface, window_size:Tuple[int, int], font:pygame.Font, pos:List[int], size:List[int], color:Tuple[int, int, int, int]=(111, 123, 128, 255), color_hover:Tuple[int, int, int, int]=(79, 88, 92, 255), text:str="", text_color:tuple=(0, 0, 0)):
         self.onclick = onclick
         self.window = window
+        self.window_size = window_size
         self.pos = pos
         self.size = size
         self.default_color = color
@@ -14,9 +16,12 @@ class Button:
         self.text = text
         self.text_color = text_color
         self.font = font
+
+        self.pos = [self.pos[0] - self.size[0] / 2, self.pos[1] - self.size[1] / 2]
+        
         text_width, text_height = self.font.size(self.text)
         self.text_pos = (self.pos[0] + self.size[0] / 2 -text_width / 2, self.pos[1] + self.size[1] / 2 - text_height / 2)
-        print(self.size)
+
 
     def loop(self):
         rect(self.window, self.pos, self.size, self.color)

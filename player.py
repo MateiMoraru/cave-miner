@@ -2,13 +2,16 @@ import pygame
 from entity import Entity
 from spritesheet import *
 from typing import List, Tuple
-from light import LIGHT
+from light import Light
 
 class Player(Entity):
-    def __init__(self, window:pygame.Surface, pos:List[float], sprite:pygame.Surface=None, spritesheet:Spritesheet=None):
-        super().__init__(window, pos, (70, 70), (0, 0, 0), sprite)
+    def __init__(self, window:pygame.Surface, pos:List[float], tile_size:Tuple[int, int], sprite:pygame.Surface=None, spritesheet:Spritesheet=None):
+        self.tile_size = tile_size
+        super().__init__(window, pos, tile_size, (0, 0, 0), sprite)
         self.offset = [0, 0]
         self.spritesheet = spritesheet
+        light_tex =  pygame.image.load("assets/light.png")
+        self.light = Light(self.size[0] * 5, self.middle, light_tex)
 
     
     def draw(self):

@@ -1,6 +1,6 @@
 import pygame
 from button import Button
-from typing import Callable
+from typing import List, Tuple
 
 class Menu:
     def __init__(self, window:pygame.Surface, window_size:tuple, size:tuple, offset:tuple=(0, 0), color:tuple=(50, 50, 50, 255)):
@@ -31,6 +31,6 @@ class Menu:
             button.loop()
 
     
-    def add_buttons(self, onclick, font:pygame.Font, pos:tuple, size:tuple, color:tuple=(111, 123, 128, 255), text:str="", text_color:tuple=(0, 0, 0)):
-        self.buttons.append(Button(onclick, self.window, font, pos, size, color, (79, 88, 92, 255), text, text_color))
+    def add_buttons(self, onclick, font:pygame.Font, pos:List[int], size:List[int], color:Tuple[int, int, int, int]=(111, 123, 128, 255), text:str="", text_color:tuple=(0, 0, 0)):
+        self.buttons.append(Button(onclick, self.window, self.window_size, font, pos, size, color, (79, 88, 92, 255), text, text_color))
 

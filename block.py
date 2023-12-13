@@ -1,3 +1,4 @@
+import math
 from typing import *
 import pygame
 
@@ -95,3 +96,17 @@ def collide_point(rect:List[int], point:List[int]):
     collide_x = point[0] > rect[0] and point[0] < rect[0] + rect[2]
     collide_y = point[1] > rect[1] and point[1] < rect[1] + rect[3]
     return collide_x and collide_y
+
+
+def dist_block(point:tuple, rect:Rect):
+    dx = abs(point[0] - (rect.rect.x + rect.rect.w / 2)) ** 2
+    dy = abs(point[1] - (rect.rect.y + rect.rect.h / 2)) ** 2
+
+    return math.sqrt(dx + dy) 
+    
+    
+def dist_point(point:tuple, point2:tuple):
+    dx = abs(point[0] - point2[0]) ** 2
+    dy = abs(point[1] - point2[1]) ** 2
+
+    return math.sqrt(dx + dy) 
