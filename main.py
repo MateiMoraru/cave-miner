@@ -8,8 +8,6 @@ import pyautogui
 class Game:
     def __init__(self):
         pygame.init()
-        
-
         screen_size = pyautogui.size()
         self.window_size = (screen_size.width, screen_size.height)
         self.scale = screen_size[0] / 1100 # Default sizing is (1100, 750)
@@ -19,7 +17,6 @@ class Game:
 
         self.font = pygame.font.Font('assets/font.ttf', int(20 * self.scale))
         self.spritesheet = Spritesheet("assets/spritesheet.png", 32, 320)
-        #self.tiles = Spritesheet("assets/tiles.png", 32, 320)
         self.environment = Environment(self.window, self.window_size, self.scale, self.spritesheet, self.font) 
 
         self.clock = pygame.time.Clock()
@@ -51,6 +48,8 @@ class Game:
                 if e.type == pygame.KEYDOWN:
                     if e.key == pygame.K_ESCAPE:
                         self.in_menu[0] = not self.in_menu[0]
+                    if e.key == pygame.K_HOME:
+                        self.environment.tiles.save_tilemap()
                     
             self.window.fill((0, 5, 13))
 
@@ -69,6 +68,7 @@ class Game:
 
 
     def exit(self):
+        self.environment.tiles.save_tilemap()
         quit()
 
 

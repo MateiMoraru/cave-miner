@@ -28,7 +28,7 @@ class Environment:
 
 
     def draw(self):
-        self.tiles.loop(self.in_camera_bounds, self.player.offset, self.player.pos)
+        self.tiles.loop(self.in_camera_bounds, self.player)
         self.player.draw()
         self.window.blit(self.screen_light, (0, 0))
     

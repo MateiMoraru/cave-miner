@@ -83,6 +83,7 @@ class Rect:
 
     def rm_texture(self):
         self.texture = None
+        self.type = "air"
 
 
 def rect(window: pygame.Surface, pos: tuple, size: tuple, color: tuple):

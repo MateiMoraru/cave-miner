@@ -39,7 +39,8 @@ class Spritesheet(object):
         tups = [(rect[0]+rect[2]*x, rect[1], rect[2], rect[3])
                 for x in range(image_count)]
         return self.images_at(tups, colorkey)
-    
+
+WALL_1 = 16    
 PLAYER = 20
 PLAYER_RIGHT_1 = 21
 PLAYER_RIGHT_2 = 22
